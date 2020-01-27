@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 2.8.12)
-
 PROJECT(face_detection)
-
+set(OpenCV_DIR "D:/Research/opencv/Install/opencv")
 find_package( OpenCV REQUIRED )
 
 include_directories( ${OpenCV_INCLUDE_DIRS})
 
-include(./dlib/dlib/cmake)
+include(../dlib/dlib/cmake)
 
 MACRO(add_example name)
   ADD_EXECUTABLE(${name} ${name}.cpp)

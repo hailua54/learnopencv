@@ -51,7 +51,7 @@ void detectFaceOpenCVHaar(CascadeClassifier faceCascade, Mat &frameOpenCVHaar, i
 		cv::rectangle(frameOpenCVHaar, Point(x1, y1), Point(x2, y2), Scalar(0,255,0), (int)(frameHeight/150.0), 4);
 	}
 }
-
+// this size will appect performance . org is 300x300 => Fps = 3.0
 const size_t inWidth = 300;
 const size_t inHeight = 300;
 const double inScaleFactor = 1.0;
@@ -92,7 +92,7 @@ void detectFaceOpenCVDNN(Net net, Mat &frameOpenCVDNN)
 			int x2 = static_cast<int>(detectionMat.at<float>(i, 5) * frameWidth);
 			int y2 = static_cast<int>(detectionMat.at<float>(i, 6) * frameHeight);
 
-			cv::rectangle(frameOpenCVDNN, cv::Point(x1, y1), cv::Point(x2, y2), cv::Scalar(0, 255, 0),(int)(frameHeight/150.0), 4);
+			cv::rectangle(frameOpenCVDNN, cv::Point(x1, y1), cv::Point(x2, y2), cv::Scalar(0, 255, 0), (int)(frameHeight/150.0), 4);
 		}
 	}
 
@@ -227,6 +227,7 @@ int main( int argc, const char** argv )
 		double fpsOpencvHaar = frame_count/tt_opencvHaar;
 		putText(frameOpenCVHaar, format("OpenCV HAAR ; FPS = %.2f",fpsOpencvHaar), Point(10, 50), FONT_HERSHEY_SIMPLEX, 1.4, Scalar(0, 0, 255), 4);
 		*/
+		
 		Mat frameOpenCVDNN = frame.clone();
 		t = cv::getTickCount();
 		detectFaceOpenCVDNN ( net, frameOpenCVDNN );
@@ -241,7 +242,8 @@ int main( int argc, const char** argv )
 		tt_dlibHog += ((double)cv::getTickCount() - t)/cv::getTickFrequency();
 		double fpsDlibHog = frame_count/tt_dlibHog;
 		putText(frameDlibHog, format("DLIB HoG ; FPS = %.2f",fpsDlibHog), Point(10, 50), FONT_HERSHEY_SIMPLEX, 1.4, Scalar(0, 0, 255), 4);
-		
+		*/
+		/*
 		t = cv::getTickCount();
 		Mat frameDlibMmod = frame.clone();
 		detectFaceDlibMMOD ( mmodFaceDetector, frameDlibMmod );
